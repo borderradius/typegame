@@ -1,9 +1,12 @@
 const path = require('path')
+const webpack = require('webpack')
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
   entry: {
-    main: './src/js/app.js'
+    main: './src/app.js'
   },
   output: {
     filename: '[name].js',
@@ -12,9 +15,26 @@ module.exports = {
   devServer: {
     open: true,
     hot: true,
-    // contentBase: path.join(__dirname, "dist"),
-    // publicPath: '/',
-    // compress: true,
-    // port: 9000
-  }
+    stats: 'errors-only'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: ['babel-loader'],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader','css-loader'] 
+      }
+    ]
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/index.html', 
+    })
+  ]
 }
