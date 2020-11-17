@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/borderradius/typegame/issues"
   },
-  "homepage": "https://github.com/borderradius/typegame#readme"
+  "homepage": "https://github.com/borderradius/typegame#readme",
+  "dependencies": {
+    "webpack": "^5.4.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {}
 }
