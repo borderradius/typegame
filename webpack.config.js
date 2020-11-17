@@ -15,7 +15,10 @@ module.exports = {
   devServer: {
     open: true,
     hot: true,
-    stats: 'errors-only'
+    stats: 'errors-only',
+    // before: app => {
+    //   app.get('')
+    // }
   },
   module: {
     rules: [
