@@ -16,9 +16,6 @@ module.exports = {
     open: true,
     hot: true,
     stats: 'errors-only',
-    // before: app => {
-    //   app.get('')
-    // }
   },
   module: {
     rules: [
