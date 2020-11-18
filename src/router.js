@@ -1,11 +1,9 @@
 import About from './pages/about.html';
-// import Home from './pages/home.html';
-import {template} from './pages/about.js';
+import Home from './pages/home.js';
 
-console.warn(template);
 const routes = {
-  '/': template,
-  '/home': template,
+  '/': Home,
+  '/home': Home,
   '/about': About
 }
 
