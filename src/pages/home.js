@@ -9,11 +9,13 @@ const template = `
     </div>    
     <p>제시 단어</p>
     <input type="text" placeholder="위 텍스트를 따라서 입력하세요">
-    <button>시작</button>
+    <button id="start">시작</button>
     <span class="history" route="/about">완료시 이동페이지</span>
   </div>
 </div>
 `
+const start = document.getElementById('start')
+console.warn(start);
 
 export default template
   
