@@ -1,10 +1,11 @@
-import About from './pages/about.html';
+import Complete from './pages/complete.js';
 import Home from './pages/home.js';
+// import Home from './index.html';
 
 const routes = {
   '/': Home,
   '/home': Home,
-  '/about': About
+  '/complete': Complete
 }
 
 // entry point
@@ -13,11 +14,7 @@ function initialRoutes (mode, el) {
 
   if (mode === 'history') {
     window.onpopstate = () => renderHTML(el, routes[window.location.pathname])
-  } else {
-    window.addEventListener('hashchange', () => {
-      return renderHTML(el, getHashRoute())
-    })
-  }
+  } 
 }
 
 // set browser history

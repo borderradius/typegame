@@ -1,22 +1,31 @@
 import style from '../style.css';
-// import { getList } from './model/List';
+import MainController from './controllers/MainController';
+// import View from './pages/view2';
 
+document.addEventListener('DOMContentLoaded', () => {
+  MainController.init()
+  // const gameWrap = document.getElementsByClassName('game-wrap')
+  // console.log(gameWrap);
+  // View.setup(gameWrap[0])
+  // const startBtn = document.getElementById('start')
+  // console.log(View);
+})
 
-import {initialRoutes,historyRouterPush} from './router.js'
+// import {initialRoutes,historyRouterPush} from './router.js'
 
-const historyAppDiv = document.querySelector('#history-app')
+// const historyAppDiv = document.querySelector('#history-app')
 
 // Browser History
-initialRoutes('history', historyAppDiv)
+// initialRoutes('history', historyAppDiv)
 
-window.onload = () => {
-  const historyLinker = document.querySelectorAll('span.history')
+// window.onload = () => {
+//   const historyLinker = document.querySelectorAll('span.history')
 
-  historyLinker.forEach(el => {
-    el.addEventListener('click', (evt) => {
-      const pathName = evt.target.getAttribute('route')
+//   historyLinker.forEach(el => {
+//     el.addEventListener('click', (evt) => {
+//       const pathName = evt.target.getAttribute('route')
 
-      historyRouterPush(pathName, historyAppDiv)
-    })
-  })
-}
+//       historyRouterPush(pathName, historyAppDiv)
+//     })
+//   })
+// }
