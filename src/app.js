@@ -1,5 +1,5 @@
 import style from '../style.css';
-import MainController from './controllers/MainController';
+import MainController from './controllers/mainController';
 // import View from './pages/view2';
 
 document.addEventListener('DOMContentLoaded', () => {

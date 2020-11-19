@@ -1,5 +1,10 @@
 // import {getList} from '../model/List';
 
+
+// getList.then((val) => {
+//   console.log(val)
+// })
+
 // let result = []
 // // let template = ``
 // getList.then((val) => {
