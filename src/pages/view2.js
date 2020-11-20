@@ -27,10 +27,9 @@ InputView.bindEvents = function(){
 InputView.onKeyup = function(e) {
   if(e.keyCode === 13){
     const isAnswer = this.inputEl.value === this.result[this.index].text
-    console.warn(this.index);
     if(isAnswer && this.index < this.result.length){
       this.index++
-      if(this.index === this.result.length -1) return
+      if(this.index === this.result.length) return // 완료페이지로 넘어가기 해야함.
       this.nextWord()
       this.inputEl.value = ''
       return false
@@ -53,6 +52,7 @@ InputView.getData = function() {
   getList('https://my-json-server.typicode.com/kakaopay-fe/resources/words')
     .then((rs) => {
       this.result = rs
+      this.score = rs.length
     })
     .catch((err) => {
       console.log('통신 에러 : ', err)
@@ -61,7 +61,7 @@ InputView.getData = function() {
 
 InputView.nextWord = function() {
   this.printData()
-  // countDown()
+  this.countDown()
 }
 
 
@@ -69,16 +69,14 @@ InputView.nextWord = function() {
  * 화면에 데이터 뿌림
  */
 InputView.printData = function() {
-  this.score = this.result.length
   this.secondEl.innerText = this.result[this.index].second
   this.testWordEl.innerText = this.result[this.index].text
   this.scoreEl.innerText = this.score
 }
 
 /**
-   * 시작하자마자 시간이 흘러가야함
-   * 0초 = 새로운 시간 , 새로운 단어
-   * */
+ * 0초 = 새로운 시간 , 새로운 단어
+ * */
 InputView.countDown = function () {
   let second = this.result[this.index].second
   const timer = setInterval(() => {
@@ -87,7 +85,9 @@ InputView.countDown = function () {
     if(!second) {
       clearInterval(timer)
       // 점수차감
-      deductScore(this.scoreEl)
+      this.deductScore() // 0초일때 점수차감
+      this.index++
+      this.nextWord() // 0초일때 다음단어로 넘어감
     }
   }, 1000);
 }
@@ -95,9 +95,13 @@ InputView.countDown = function () {
 /**
  * 점수 차감
  */
-const deductScore = function (el) {
-  let score = Number(el.textContent)
-  el.innerText = --score
+InputView.deductScore = function () {
+  // this.score = this.score -1
+  // console.log(typeof this.score);
+  this.score--
+  this.scoreEl.innerText = this.score
+  // let score = Number(el.textContent)
+  // el.innerText = --score
 }
 
 export default InputView
