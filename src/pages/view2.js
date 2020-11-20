@@ -5,30 +5,16 @@ const InputView = Object.create(View)
 
 InputView.setup = function(el) {
   this.init(el)
+  this.result = []
+  this.index = 0
   this.inputEl = el.querySelector('[type=text]')
   this.buttonEl = el.querySelector('#start')
   this.secondEl = el.querySelector('.second')
-  this.pointEl = el.querySelector('.point')
+  this.scoreEl = el.querySelector('.score')
   this.testWordEl = el.querySelector('.test-word')
+  this.score = 0
   this.bindEvents()
-
   this.getData()
-  
-    // 1초에 한번씩 rs[i].second 를 1차감한다
-    // 차감된 rs[i].second 를 화면에 표시한다.
-    // 차감된 시간이 0이면 다음 인덱스
-    // 텍스트 입력이 완료되면 다음 인덱스
-
-  // this.countDown = function(el, second){
-    // console.log(second);
-    // while (second > 0) {
-    //   setTimeout(() => {
-    //     console.log('settimeout run ? ');
-    //     second--
-    //     el.innerText = second  
-    //   }, 1000);
-    // }
-  // }
     
   return this
 }
@@ -39,46 +25,80 @@ InputView.bindEvents = function(){
 }
 
 InputView.onKeyup = function(e) {
-  console.log(this.inputEl.value);
+  if(e.keyCode === 13){
+    const isAnswer = this.inputEl.value === this.result[this.index].text
+    console.warn(this.index);
+    if(isAnswer && this.index < this.result.length){
+      this.index++
+      if(this.index === this.result.length -1) return
+      this.nextWord()
+      this.inputEl.value = ''
+      return false
+    }
+    this.inputEl.value = ''
+    
+  }
 }
 
 InputView.onClick = function() {
-  // this.emit('@submit', {data: 'clicked'})
+  if(this.buttonEl.textContent === '시작') {
+    this.buttonEl.innerText = '초기화'
+    this.nextWord()
+  }else{
+    this.buttonEl.innerText = '시작'
+  }
 }
 
 InputView.getData = function() {
   getList('https://my-json-server.typicode.com/kakaopay-fe/resources/words')
     .then((rs) => {
       this.result = rs
-      this.secondEl.innerText = rs[0].second
-      this.testWordEl.innerText = rs[0].text
-      countDown(this.secondEl,rs[0].second)
     })
     .catch((err) => {
       console.log('통신 에러 : ', err)
     })
 }
 
+InputView.nextWord = function() {
+  this.printData()
+  // countDown()
+}
+
+
+/**
+ * 화면에 데이터 뿌림
+ */
+InputView.printData = function() {
+  this.score = this.result.length
+  this.secondEl.innerText = this.result[this.index].second
+  this.testWordEl.innerText = this.result[this.index].text
+  this.scoreEl.innerText = this.score
+}
+
 /**
    * 시작하자마자 시간이 흘러가야함
-   * 
+   * 0초 = 새로운 시간 , 새로운 단어
    * */
-const countDown = function (el, second) {
-  console.log(el, second);
-  
-
-  setInterval(() => {
-    if (second < 1) clearInterval()
+InputView.countDown = function () {
+  let second = this.result[this.index].second
+  const timer = setInterval(() => {
     second--
-    el.innerText = second
+    this.secondEl.innerText = second
+    if(!second) {
+      clearInterval(timer)
+      // 점수차감
+      deductScore(this.scoreEl)
+    }
   }, 1000);
-
-  // while (second > 0) {
-  //   setInterval(() => {
-  //     second--
-  //     el.innerText = second
-  //   }, 1000);
-  // }
 }
+
+/**
+ * 점수 차감
+ */
+const deductScore = function (el) {
+  let score = Number(el.textContent)
+  el.innerText = --score
+}
+
 export default InputView
 
