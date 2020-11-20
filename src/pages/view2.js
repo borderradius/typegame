@@ -96,12 +96,8 @@ InputView.countDown = function () {
  * 점수 차감
  */
 InputView.deductScore = function () {
-  // this.score = this.score -1
-  // console.log(typeof this.score);
   this.score--
   this.scoreEl.innerText = this.score
-  // let score = Number(el.textContent)
-  // el.innerText = --score
 }
 
 export default InputView
