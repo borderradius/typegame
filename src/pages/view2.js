@@ -5,18 +5,36 @@ const InputView = Object.create(View)
 
 InputView.setup = function(el) {
   this.init(el)
-  this.result = []
   this.index = 0
+  this.score = 0
+  this.timer = ''
+  this.result = []
   this.inputEl = el.querySelector('[type=text]')
   this.buttonEl = el.querySelector('#start')
   this.secondEl = el.querySelector('.second')
   this.scoreEl = el.querySelector('.score')
   this.testWordEl = el.querySelector('.test-word')
-  this.score = 0
   this.bindEvents()
   this.getData()
     
   return this
+}
+
+InputView.reset = function() {
+  console.warn('리셋 됌');
+  clearInterval(this.timer)
+  this.index = 0
+  this.score = 0
+  this.timer = ''
+  this.result = []
+  this.inputEl.innerText = ''
+  this.buttonEl.innerText = '시작'
+  this.inputEl.disabled = true
+  this.inputEl.value = ''
+  this.secondEl.innerText = ''
+  this.scoreEl.innerText = ''
+  this.testWordEl.innerText = ''
+  this.getData()
 }
 
 InputView.bindEvents = function(){
@@ -26,10 +44,13 @@ InputView.bindEvents = function(){
 
 InputView.onKeyup = function(e) {
   if(e.keyCode === 13){
+    console.warn(this.index);
     const isAnswer = this.inputEl.value === this.result[this.index].text
     if(isAnswer && this.index < this.result.length){
       this.index++
-      if(this.index === this.result.length) return // 완료페이지로 넘어가기 해야함.
+      if(this.index === this.result.length) {
+        window.location.href = '/complete'
+      }
       this.nextWord()
       this.inputEl.value = ''
       return false
@@ -41,10 +62,13 @@ InputView.onKeyup = function(e) {
 
 InputView.onClick = function() {
   if(this.buttonEl.textContent === '시작') {
+    console.warn('시작버튼 눌렀을 떄');
     this.buttonEl.innerText = '초기화'
+    this.inputEl.disabled = false
     this.nextWord()
   }else{
-    this.buttonEl.innerText = '시작'
+    console.warn('초기화버튼 눌렀을 때');
+    this.reset()
   }
 }
 
@@ -60,6 +84,7 @@ InputView.getData = function() {
 }
 
 InputView.nextWord = function() {
+  console.warn('다음단어 주세요');
   this.printData()
   this.countDown()
 }
@@ -78,12 +103,15 @@ InputView.printData = function() {
  * 0초 = 새로운 시간 , 새로운 단어
  * */
 InputView.countDown = function () {
+  console.warn('카운트다운 시작 됌');
+  clearInterval(this.timer)
   let second = this.result[this.index].second
-  const timer = setInterval(() => {
+  this.timer = setInterval(() => {
     second--
     this.secondEl.innerText = second
     if(!second) {
-      clearInterval(timer)
+      console.warn('0초 일떄');
+      clearInterval(this.timer)
       // 점수차감
       this.deductScore() // 0초일때 점수차감
       this.index++

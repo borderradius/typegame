@@ -1,6 +1,5 @@
 import style from '../style.css';
 import MainController from './controllers/mainController';
-// import View from './pages/view2';
 
 document.addEventListener('DOMContentLoaded', () => {
   MainController.init()
@@ -11,21 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // console.log(View);
 })
 
-// import {initialRoutes,historyRouterPush} from './router.js'
+import {initialRoutes,historyRouterPush} from './router.js'
 
-// const historyAppDiv = document.querySelector('#history-app')
+const historyAppDiv = document.querySelector('#history-app')
 
 // Browser History
-// initialRoutes('history', historyAppDiv)
+initialRoutes('history', historyAppDiv)
 
-// window.onload = () => {
-//   const historyLinker = document.querySelectorAll('span.history')
+window.onload = () => {
+  const historyLinker = document.querySelectorAll('span.history')
 
-//   historyLinker.forEach(el => {
-//     el.addEventListener('click', (evt) => {
-//       const pathName = evt.target.getAttribute('route')
+  historyLinker.forEach(el => {
+    el.addEventListener('click', (evt) => {
+      const pathName = evt.target.getAttribute('route')
 
-//       historyRouterPush(pathName, historyAppDiv)
-//     })
-//   })
-// }
+      historyRouterPush(pathName, historyAppDiv)
+    })
+  })
+}
