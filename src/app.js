@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   MainController.init()
 })
 
-import {initialRoutes,historyRouterPush} from './router.js'
+import {initialRoutes} from './router.js'
 
 const historyAppDiv = document.querySelector('#app')
 
