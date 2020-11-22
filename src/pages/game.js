@@ -1,8 +1,8 @@
-import View from './view.js';
+import Default from './default.js';
 import {getList} from '../models/list'
 import { historyRouterPush } from '../router.js'
 
-const InputView = Object.create(View)
+const InputView = Object.create(Default)
 
 InputView.setup = function(el) {
   this.init(el)
@@ -16,7 +16,6 @@ InputView.setup = function(el) {
   this.secondEl = el.querySelector('.second')
   this.scoreEl = el.querySelector('.score')
   this.testWordEl = el.querySelector('.test-word')
-  // this.historyEl = el.querySelector('.history')
   this.bindEvents()
   this.getData()
     
@@ -43,7 +42,6 @@ InputView.reset = function() {
 InputView.bindEvents = function(){
   this.inputEl.addEventListener('keyup', e => this.onKeyup(e))
   this.buttonEl.addEventListener('click', e => this.onClick(e))
-  // this.historyEl.addEventListener('click', e => this.onNextPage(e))
 }
 
 InputView.onNextPage = function(e) {

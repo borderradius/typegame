@@ -4,9 +4,7 @@ import ResultView from '../pages/result';
 export default {
   init() {
     const gameWrap = document.getElementsByClassName('game-wrap')
-    InputView.setup(gameWrap[0])
-      .on('@goComplete', e => this.goComplete())
-      
+    InputView.setup(gameWrap[0]).on('@goComplete', e => this.goComplete())
   },
 
   goComplete() {
@@ -15,7 +13,6 @@ export default {
   },
 
   goMain() {
-    // this.init()
     InputView.reset()
   }
 }

@@ -1,13 +1,11 @@
-import Complete from './template/complete.js';
+import Result from './template/result.js';
 import Home from './template/home.js';
-// import Home from './index.html';
 
 const routes = {
   '/': Home,
-  '/complete': Complete
+  '/complete': Result
 }
 
-// entry point
 function initialRoutes (mode, el) {
   renderHTML(el, routes['/'])
 
@@ -16,13 +14,11 @@ function initialRoutes (mode, el) {
   } 
 }
 
-// set browser history
 function historyRouterPush (pathName, el, params = {}) {
   window.history.pushState(params, pathName, window.location.origin + pathName)
   renderHTML(el, routes[pathName])
 }
 
-// render
 function renderHTML (el, route) {
   el.innerHTML = route
 }

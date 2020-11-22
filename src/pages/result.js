@@ -1,7 +1,7 @@
-import View from './view';
+import Default from './default';
 import { historyRouterPush } from '../router.js'
 
-const ResultView = Object.create(View)
+const ResultView = Object.create(Default)
 
 ResultView.setup = function(el) {
   this.init(el)
@@ -10,7 +10,6 @@ ResultView.setup = function(el) {
   this.avgTimeEl = el.querySelector('.avg-time')
   this.avgTimeEl.innerText = history.state.solveTime
   this.resetEl = el.querySelector('.re-btn')
-
   this.bindEvent()
   return this
 }
@@ -20,8 +19,6 @@ ResultView.bindEvent = function() {
 }
 
 ResultView.onNextPage = function (e) {
-  // console.warn(history);
-  // history.go(-1)
   const historyAppDiv = document.querySelector('#history-app')
   historyRouterPush('/', historyAppDiv)
   this.emit('@goMain')
