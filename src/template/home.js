@@ -12,7 +12,6 @@ const template = `
     </div>
     </div>
     `
-    // <span class="history" route="/complete">완료시 이동페이지</span>
 
 export default template
   
