@@ -41,3 +41,18 @@ hr {
   align-items: center;
   justify-content: space-between;
 }
+.re-btn {
+  display: block;
+  width: 80%;
+  height: 2rem;
+  margin: 1rem auto;
+  text-align: center;
+  background: blue;
+  color: white;
+  line-height: 2rem;
+}
+.total-score, .avg-time {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: blue;
+} 

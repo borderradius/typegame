@@ -2,9 +2,9 @@ import Default from './default.js';
 import {getList} from '../models/list'
 import { historyRouterPush } from '../router.js'
 
-const InputView = Object.create(Default)
+const GameView = Object.create(Default)
 
-InputView.setup = function(el) {
+GameView.setup = function(el) {
   this.init(el)
   this.index = 0
   this.score = 0
@@ -22,7 +22,7 @@ InputView.setup = function(el) {
   return this
 }
 
-InputView.reset = function() {
+GameView.reset = function() {
   console.warn('리셋 됌');
   clearInterval(this.timer)
   this.index = 0
@@ -39,18 +39,18 @@ InputView.reset = function() {
   this.getData()
 }
 
-InputView.bindEvents = function(){
+GameView.bindEvents = function(){
   this.inputEl.addEventListener('keyup', e => this.onKeyup(e))
   this.buttonEl.addEventListener('click', e => this.onClick(e))
 }
 
-InputView.onNextPage = function(e) {
-  const historyAppDiv = document.querySelector('#history-app')
+GameView.onNextPage = function(e) {
+  const historyAppDiv = document.querySelector('#app')
   historyRouterPush('/complete', historyAppDiv, { 'score': this.score, 'solveTime': (this.solveTime / this.result.length).toFixed(2) })
   this.emit('@goComplete')
 }
 
-InputView.onKeyup = function(e) {
+GameView.onKeyup = function(e) {
   if(e.keyCode === 13){
     const isAnswer = this.inputEl.value === this.result[this.index].text
     if(isAnswer && this.index < this.result.length){
@@ -65,7 +65,7 @@ InputView.onKeyup = function(e) {
   }
 }
 
-InputView.onClick = function() {
+GameView.onClick = function() {
   console.warn('시작눌림');
   if(this.buttonEl.textContent === '시작') {
     console.warn('시작버튼 눌렀을 떄');
@@ -78,7 +78,7 @@ InputView.onClick = function() {
   }
 }
 
-InputView.getData = function() {
+GameView.getData = function() {
   getList('https://my-json-server.typicode.com/kakaopay-fe/resources/words')
     .then((rs) => {
       this.result = rs
@@ -89,7 +89,7 @@ InputView.getData = function() {
     })
 }
 
-InputView.nextWord = function() {
+GameView.nextWord = function() {
   console.warn('다음단어 주세요');
   this.printData()
   this.countDown()
@@ -99,7 +99,7 @@ InputView.nextWord = function() {
 /**
  * 화면에 데이터 뿌림
  */
-InputView.printData = function() {
+GameView.printData = function() {
   this.secondEl.innerText = this.result[this.index].second
   this.testWordEl.innerText = this.result[this.index].text
   this.scoreEl.innerText = this.score
@@ -108,7 +108,7 @@ InputView.printData = function() {
 /**
  * 0초 = 새로운 시간 , 새로운 단어
  * */
-InputView.countDown = function () {
+GameView.countDown = function () {
   console.warn('카운트다운 시작 됌');
   clearInterval(this.timer)
   let second = this.result[this.index].second
@@ -131,10 +131,10 @@ InputView.countDown = function () {
 /**
  * 점수 차감
  */
-InputView.deductScore = function () {
+GameView.deductScore = function () {
   this.score--
   this.scoreEl.innerText = this.score
 }
 
-export default InputView
+export default GameView
 

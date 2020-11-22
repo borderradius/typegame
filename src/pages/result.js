@@ -19,7 +19,7 @@ ResultView.bindEvent = function() {
 }
 
 ResultView.onNextPage = function (e) {
-  const historyAppDiv = document.querySelector('#history-app')
+  const historyAppDiv = document.querySelector('#app')
   historyRouterPush('/', historyAppDiv)
   this.emit('@goMain')
 }

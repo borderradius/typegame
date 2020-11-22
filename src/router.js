@@ -1,17 +1,14 @@
 import Result from './template/result.js';
-import Home from './template/home.js';
+import Game from './template/game.js';
 
 const routes = {
-  '/': Home,
+  '/': Game,
   '/complete': Result
 }
 
-function initialRoutes (mode, el) {
+function initialRoutes (el) {
   renderHTML(el, routes['/'])
-
-  if (mode === 'history') {
-    window.onpopstate = () => renderHTML(el, routes[window.location.pathname])
-  } 
+  window.onpopstate = () => renderHTML(el, routes[window.location.pathname])
 }
 
 function historyRouterPush (pathName, el, params = {}) {
