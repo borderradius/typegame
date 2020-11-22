@@ -1,10 +1,9 @@
-import Complete from './pages/complete.js';
-import Home from './pages/home.js';
+import Complete from './template/complete.js';
+import Home from './template/home.js';
 // import Home from './index.html';
 
 const routes = {
   '/': Home,
-  '/home': Home,
   '/complete': Complete
 }
 
@@ -18,8 +17,8 @@ function initialRoutes (mode, el) {
 }
 
 // set browser history
-function historyRouterPush (pathName, el) {
-  window.history.pushState({}, pathName, window.location.origin + pathName)
+function historyRouterPush (pathName, el, params = {}) {
+  window.history.pushState(params, pathName, window.location.origin + pathName)
   renderHTML(el, routes[pathName])
 }
 

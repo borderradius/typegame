@@ -1,5 +1,3 @@
-const tag = '[view]'
-
 export default {
   init(el) {
     if (!el) throw el
@@ -18,13 +16,13 @@ export default {
     return this
   },
 
-  hide() {
-    this.el.style.display = 'none'
-    return this
-  },
+  // hide() {
+  //   this.el.style.display = 'none'
+  //   return this
+  // },
 
-  show() {
-    this.el.style.display = ''
-    return this
-  }
+  // show() {
+  //   this.el.style.display = ''
+  //   return this
+  // }
 }

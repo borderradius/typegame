@@ -1,5 +1,6 @@
 import View from './view.js';
-import {getList} from '../model/list'
+import {getList} from '../models/list'
+import { historyRouterPush } from '../router.js'
 
 const InputView = Object.create(View)
 
@@ -8,12 +9,14 @@ InputView.setup = function(el) {
   this.index = 0
   this.score = 0
   this.timer = ''
+  this.solveTime = 0
   this.result = []
   this.inputEl = el.querySelector('[type=text]')
   this.buttonEl = el.querySelector('#start')
   this.secondEl = el.querySelector('.second')
   this.scoreEl = el.querySelector('.score')
   this.testWordEl = el.querySelector('.test-word')
+  // this.historyEl = el.querySelector('.history')
   this.bindEvents()
   this.getData()
     
@@ -40,17 +43,21 @@ InputView.reset = function() {
 InputView.bindEvents = function(){
   this.inputEl.addEventListener('keyup', e => this.onKeyup(e))
   this.buttonEl.addEventListener('click', e => this.onClick(e))
+  // this.historyEl.addEventListener('click', e => this.onNextPage(e))
+}
+
+InputView.onNextPage = function(e) {
+  const historyAppDiv = document.querySelector('#history-app')
+  historyRouterPush('/complete', historyAppDiv, { 'score': this.score, 'solveTime': (this.solveTime / this.result.length).toFixed(2) })
+  this.emit('@goComplete')
 }
 
 InputView.onKeyup = function(e) {
   if(e.keyCode === 13){
-    console.warn(this.index);
     const isAnswer = this.inputEl.value === this.result[this.index].text
     if(isAnswer && this.index < this.result.length){
       this.index++
-      if(this.index === this.result.length) {
-        window.location.href = '/complete'
-      }
+      if(this.index === this.result.length) this.onNextPage()
       this.nextWord()
       this.inputEl.value = ''
       return false
@@ -61,6 +68,7 @@ InputView.onKeyup = function(e) {
 }
 
 InputView.onClick = function() {
+  console.warn('시작눌림');
   if(this.buttonEl.textContent === '시작') {
     console.warn('시작버튼 눌렀을 떄');
     this.buttonEl.innerText = '초기화'
@@ -107,9 +115,11 @@ InputView.countDown = function () {
   clearInterval(this.timer)
   let second = this.result[this.index].second
   this.timer = setInterval(() => {
+    this.solveTime++
     second--
     this.secondEl.innerText = second
     if(!second) {
+      this.solveTime -= this.result[this.index].second
       console.warn('0초 일떄');
       clearInterval(this.timer)
       // 점수차감

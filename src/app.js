@@ -17,14 +17,14 @@ const historyAppDiv = document.querySelector('#history-app')
 // Browser History
 initialRoutes('history', historyAppDiv)
 
-window.onload = () => {
-  const historyLinker = document.querySelectorAll('span.history')
+// window.onload = () => {
+//   const historyLinker = document.querySelectorAll('span.history')
 
-  historyLinker.forEach(el => {
-    el.addEventListener('click', (evt) => {
-      const pathName = evt.target.getAttribute('route')
+//   historyLinker.forEach(el => {
+//     el.addEventListener('click', (evt) => {
+//       const pathName = evt.target.getAttribute('route')
 
-      historyRouterPush(pathName, historyAppDiv)
-    })
-  })
-}
+//       historyRouterPush(pathName, historyAppDiv)
+//     })
+//   })
+// }
