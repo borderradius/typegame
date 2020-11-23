@@ -49,6 +49,24 @@ export const getList = function (url) {
 화면별로 템플릿리터럴을 사용해 html 구성
 router.js에서 세그먼트별 페이지 렌더링에 사용됌.
 
+```javascript
+const template = `
+<div class="page">
+  <div class="game-wrap">
+    <h1>Typing Game</h1>
+    <div class="top-area">
+      <span>남은시간: <span class="second"></span> 초</span>
+      <span>점수: <span class="score"></span> 점</span>
+      </div>
+    <p class="test-word"></p>
+    <input type="text" id="input" disabled=true>
+    <button id="start">시작</button>
+    </div>
+    </div>
+    `;
+export default template;
+```
+
 ### 3. 라우팅
 
 - router.js
