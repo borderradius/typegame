@@ -110,6 +110,7 @@ GameView.printData = function() {
  * */
 GameView.countDown = function () {
   console.warn('카운트다운 시작 됌');
+  console.log(this);
   clearInterval(this.timer)
   let second = this.result[this.index].second
   this.timer = setInterval(() => {
