@@ -21,7 +21,7 @@ ResultView.bindEvent = function() {
 ResultView.onNextPage = function (e) {
   const historyAppDiv = document.querySelector('#app')
   historyRouterPush('/', historyAppDiv)
-  this.emit('@goMain')
+  this.emit('@goReset')
 }
 
 export default ResultView

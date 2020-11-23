@@ -46,35 +46,21 @@ export const getList = function (url) {
 - template/game.js
 - template/result.js
 
-화면별로 템플릿리터럴을 사용해 html 구성
-router.js에서 세그먼트별 페이지 렌더링에 사용됌.
-
-```javascript
-const template = `
-<div class="page">
-  <div class="game-wrap">
-    <h1>Typing Game</h1>
-    <div class="top-area">
-      <span>남은시간: <span class="second"></span> 초</span>
-      <span>점수: <span class="score"></span> 점</span>
-      </div>
-    <p class="test-word"></p>
-    <input type="text" id="input" disabled=true>
-    <button id="start">시작</button>
-    </div>
-    </div>
-    `;
-export default template;
-```
+html파일로 구성했었으나 라우팅할때 해당영역만을 마운트시키는게 더 깔끔해보여서 화면별로 템플릿리터럴을 사용해 화면구성.<br/>
+router.js에서 세그먼트별 페이지 렌더링에 사용됌. <br/> \${}를 사용해 템플릿리터럴 안에서 바로 데이터를 표기하는 방법도 생각해 보았으나
+그렇게하면 기능구현부분이 깔끔하지 않을 것 같아서 분리함.
 
 ### 3. 라우팅
 
 - router.js
 
-History API 를 사용하여 세그먼트별로 해당 template를 렌더링하여 화면구성
+History API 를 사용하여 세그먼트별로 해당 template를 렌더링하여 화면구성<br/>
+최초 루트 라우팅을 위한 `initialRoutes` 함수와 다른 세그먼트로 이동할 수 있는 `historyRouterPush` 함수 제공
 
 ### 4. 컨트롤러
 
 - controllers/mainController.js
 
-dispatch 이벤트를 통해 각 페이지에서 필요한 동작들을 정의한 js를 맵핑한다.
+화면전환은 라우팅을 통해 템플릿전환을 하였다. <br/>
+화면에 필요한 기능은 dispatch 이벤트를 통해 각 페이지에서 필요한 동작들을 정의한 js를 맵핑시켰다.<br/>
+게임완료 후 재시작을 할 때 `this.init()` 을 통해 초기화를 할 경우 자동으로 재시작되어서 `GameView.reset()` 으로 리셋작업만 수행.

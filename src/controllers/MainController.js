@@ -9,10 +9,6 @@ export default {
 
   goComplete() {
     const completeWrap = document.getElementsByClassName('complete-wrap')
-    ResultView.setup(completeWrap[0]).on('@goMain', e => this.goMain())
+    ResultView.setup(completeWrap[0]).on('@goReset', e => GameView.reset())
   },
-
-  goMain() {
-    GameView.reset()
-  }
 }
