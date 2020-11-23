@@ -41,10 +41,10 @@ GameView.reset = function() {
 
 GameView.bindEvents = function(){
   this.inputEl.addEventListener('keyup', e => this.onKeyup(e))
-  this.buttonEl.addEventListener('click', e => this.onStart(e))
+  this.buttonEl.addEventListener('click', e => this.onStart())
 }
 
-GameView.onNextPage = function(e) {
+GameView.onNextPage = function() {
   const historyAppDiv = document.querySelector('#app')
   historyRouterPush('/complete', historyAppDiv, { 'score': this.score, 'solveTime': (this.solveTime / this.result.length).toFixed(2) })
   this.emit('@goComplete')
