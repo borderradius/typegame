@@ -13,6 +13,9 @@
 
 서비스 진입시 페이지 렌더링은 router.js가 담당하고 해당 페이지에서 필요한 기능들은 컨트롤러를 통해 나눠지게 된다. <br/>컨트롤러에서는 init 메서드를 통해 타자게임을 할 수 있는 template/game.js 가 렌더링되고 타자게임에 필요한 기능들을 정의한 pages/games.js 를 setup 메서드를 통해 초기화한다.
 
+- 남은시간
+  - 시작버튼 클릭시 클릭이벤트 바인딩하여 `nextWord` 함수 실행, `nextWord` 는 api 데이터를 화면에 뿌리는 `printData` 함수와 문제시간을 차감하는 `countDown` 함수로 이루어져있다.
+
 ### 1. API 통신
 
 - models/list.js

@@ -41,7 +41,7 @@ GameView.reset = function() {
 
 GameView.bindEvents = function(){
   this.inputEl.addEventListener('keyup', e => this.onKeyup(e))
-  this.buttonEl.addEventListener('click', e => this.onClick(e))
+  this.buttonEl.addEventListener('click', e => this.onStart(e))
 }
 
 GameView.onNextPage = function(e) {
@@ -65,7 +65,7 @@ GameView.onKeyup = function(e) {
   }
 }
 
-GameView.onClick = function() {
+GameView.onStart = function() {
   console.warn('시작눌림');
   if(this.buttonEl.textContent === '시작') {
     console.warn('시작버튼 눌렀을 떄');
