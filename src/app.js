@@ -1,4 +1,4 @@
-import style from '../style.css';
+import moduleName from '../src/style.css';
 import MainController from './controllers/mainController';
 import {initialRoutes} from './router.js'
 
