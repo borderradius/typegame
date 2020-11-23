@@ -13,10 +13,16 @@
 
 서비스 진입시 페이지 렌더링은 router.js가 담당하고 해당 페이지에서 필요한 기능들은 컨트롤러를 통해 나눠지게 된다. <br/>컨트롤러에서는 init 메서드를 통해 타자게임을 할 수 있는 template/game.js 가 렌더링되고 타자게임에 필요한 기능들을 정의한 pages/games.js 를 setup 메서드를 통해 초기화한다.
 
-- 남은시간 (countDown 함수)
-  - countDown 함수는 setInterval을 이용해서 1초씩 차감하였으며 GameView 안에서 어디서든 clearInterval이 가능하도록 this.timer 변수에 담았다.
-- 점수 (this.score 변수)
-  -
+- 남은시간
+  - countDown 함수는 문제당 주어진 시간을 차감하는 함수로서 setInterval을 이용해서 1초씩 차감하였으며 GameView 안에서 어디서든 clearInterval이 가능하도록 this.timer 변수에 담았다.
+  - 단어당 해결시간을 구하기 위해 1초씩 차감될때마다 this.solveTime 변수에 카운트하였으며 0초가 되어 실패할 경우는 평균 시간에 포함하지 않으므로 해당 단어에 주어진 시간을 차감하였음.
+- 점수
+  - this.score 변수에 총 문제수를 기본값으로 넣고 문제풀이 시간이 0초가 될 때마다 1씩 차감하였음.
+- 입력
+  - 입력된 단어가 제시된 경우와 맞을 경우 this.index값을 올려서 서버에서 받아온 결과값의 다음 배열 데이터를 가져오도록 함.
+  - this.index의 값이 총문제수를 충족할 경우 문제를 다 푼것이므로 router를 이용해서 '/complete' 페이지로 이동. 이때 결과값의 점수와 평균타자시간을 화면에 표시하기 위해 this.score와 this.solveTime을 문제수로 나눠준 값을 파라미터로 넘긴다.
+- 시작
+  - 모든 게임이 초기화 되는 부분은 reset 함수에서 화면에 표시된 데이터와 동작에 필요한 데이터들을 기본값으로 돌렸다.
 
 ### 1. API 통신
 

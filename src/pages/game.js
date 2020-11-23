@@ -55,7 +55,10 @@ GameView.onKeyup = function(e) {
     const isAnswer = this.inputEl.value === this.result[this.index].text
     if(isAnswer && this.index < this.result.length){
       this.index++
-      if(this.index === this.result.length) this.onNextPage()
+      if(this.index === this.result.length) {
+        this.onNextPage()
+        return false
+      }
       this.nextWord()
       this.inputEl.value = ''
       return false
