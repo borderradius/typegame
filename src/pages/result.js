@@ -3,12 +3,13 @@ import { historyRouterPush } from '../router.js'
 
 const ResultView = Object.create(Default)
 
-ResultView.setup = function(el) {
+ResultView.setup = function(el, detail) {
   this.init(el)
   this.totalScoreEl = el.querySelector('.total-score')
-  this.totalScoreEl.innerText = history.state.score
+  console.warn(history);
+  this.totalScoreEl.innerText = detail.score
   this.avgTimeEl = el.querySelector('.avg-time')
-  this.avgTimeEl.innerText = history.state.solveTime
+  this.avgTimeEl.innerText = detail.solveTime
   this.resetEl = el.querySelector('.re-btn')
   this.bindEvent()
   return this

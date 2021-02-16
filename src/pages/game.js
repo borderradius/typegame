@@ -3,7 +3,6 @@ import {getList} from '../models/list'
 import { historyRouterPush } from '../router.js'
 
 const GameView = Object.create(Default)
-
 GameView.setup = function(el) {
   this.init(el)
   this.index = 0
@@ -46,8 +45,8 @@ GameView.bindEvents = function(){
 
 GameView.onNextPage = function() {
   const historyAppDiv = document.querySelector('#app')
-  historyRouterPush('/complete', historyAppDiv, { 'score': this.score, 'solveTime': (this.solveTime / this.result.length).toFixed(2) })
-  this.emit('@goComplete')
+  historyRouterPush('/complete', historyAppDiv)
+  this.emit('@goComplete', { 'score': this.score, 'solveTime': (this.solveTime / this.result.length).toFixed(2) })
 }
 
 GameView.onKeyup = function(e) {
